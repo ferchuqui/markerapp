@@ -7,6 +7,8 @@ function initMap(){
   const number = document.querySelector('input[name="number"]');
   const coords = document.querySelector('input[name="coords"]');
   const category = document.querySelector('input[name="category"]');
+  const places = [];
+
 
   map = new google.maps.Map(document.getElementById('map'),{
     center: {lat: -34.397, lng: 150.644},
@@ -14,10 +16,13 @@ function initMap(){
   });
 
   const addMarker = function(marker){
-    var marker = new google.maps.Marker({
+    const pin = new google.maps.Marker({
       position: marker.coords,
       map: map
     });
+    places.push(marker)
+
+    console.log(places)
   }
 
   form.addEventListener('submit', function (e){
