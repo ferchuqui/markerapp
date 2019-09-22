@@ -117,6 +117,8 @@ function initMap(){
       }
       document.querySelector(`[data-name=${key}]`).innerText = "Este campo no cumple las condiciones";
     })
+    if(Object.values(validations).some(validation => !validation)) return
+
     fetch('/markers', {
       method: 'post',
       body: JSON.stringify(marker),
