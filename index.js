@@ -18,11 +18,12 @@ app.get('/markers', (req, res) => {
 })
 
 app.post('/markers', (req, res) => {
-  console.log(req.body)
-  res.send({"message": "ok"})
   db.get('markers')
     .push(req.body)
     .write()
+  
+  
+  res.send({"message": "ok"})
 })
 
 app.listen(port, () => console.log(`Marker app listening on port ${port}!`))

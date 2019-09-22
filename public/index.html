@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/styles.css">
   <title>Mapa Simple</title>
 </head>
@@ -11,12 +12,27 @@
   <div id="map"></div>
   <div class="overlay">
     <form class="form">
-      <label>Descripcion: <input name="description" type="text"></label>
-      <label>Dirección: <input name="address" type="text"></label>
-      <label>Numero Telefonico<input name="number" type="text"></label>
-      <label>Coordenadas<input name="coords" type="text" value="-34.595986,-58.3724715"></label>
-      <label>Categoria<input name="category" type="text"></label>
-      <input type="submit" value="Submit">
+      <label class="label">
+        Descripcion: 
+        <input name="description" class="input" type="text">
+      </label>
+      <label class="label">
+        Dirección: 
+        <input name="address" class="input" type="text">
+      </label>
+      <label class="label">
+        Numero Telefonico
+        <input name="number" class="input" type="text">
+      </label>
+      <label class="label">
+        Coordenadas
+        <input name="coords" class="input" type="text" value="-34.595986,-58.3724715">
+      </label>
+      <label class="label">
+        Categoria
+        <input name="category" class="input" type="text">
+      </label>
+      <input type="submit" class="button" value="Agregar">
     </form>
   </div>
 
