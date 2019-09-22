@@ -81,3 +81,12 @@ html, body {
   text-transform: uppercase;
   margin-top: 15px;
 }
+
+.msg-success {
+  padding: 0 15px 0 15px;
+  color: green;
+}
+
+.hidden {
+  display: none;
+}

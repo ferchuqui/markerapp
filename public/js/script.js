@@ -7,12 +7,22 @@ function initMap(){
   const number = document.querySelector('[name="number"]');
   const coords = document.querySelector('[name="coords"]');
   const category = document.querySelector('[name="category"]');
+  const success = document.querySelector('.msg-success')
   const places = [];
+  const autoComplete = new google.maps.places.Autocomplete(address);
 
   map = new google.maps.Map(document.getElementById('map'),{
     center: {lat: -34.397, lng: 150.644},
     zoom: 8
   });
+
+  autoComplete.setFields(['geometry'])
+  autoComplete.addListener('place_changed', function(){
+    const results = autoComplete.getPlace()
+    coords.value = `${results.geometry.location.lat()} , ${results.geometry.location.lng()} `
+  });
+
+
   const markerTemplate = function(marker){
     return `
       <ul>
@@ -59,6 +69,15 @@ function initMap(){
       headers:{
         'Content-Type': 'application/json'
       }
+    }).then(() => {
+      description.value ="";
+      address.value="";
+      number.value="";
+      coords.value=""
+      success.classList.remove('hidden')
+      setTimeout(() => {
+        success.classList.add('hidden')
+      }, 5000);
     })
   })
 
