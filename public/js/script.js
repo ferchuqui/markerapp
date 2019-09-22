@@ -36,6 +36,13 @@ function initMap(){
       category: category.value
     }
     addMarker(marker);
+    fetch('/markers', {
+      method: 'post',
+      body: JSON.stringify(marker),
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    })
   })
 
   fetch('/markers')
