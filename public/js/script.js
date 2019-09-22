@@ -2,11 +2,11 @@
 var map;
 function initMap(){
   const form = document.querySelector('.form');
-  const description = document.querySelector('input[name="description"]');
-  const address = document.querySelector('input[name="address"]');
-  const number = document.querySelector('input[name="number"]');
-  const coords = document.querySelector('input[name="coords"]');
-  const category = document.querySelector('input[name="category"]');
+  const description = document.querySelector('[name="description"]');
+  const address = document.querySelector('[name="address"]');
+  const number = document.querySelector('[name="number"]');
+  const coords = document.querySelector('[name="coords"]');
+  const category = document.querySelector('[name="category"]');
   const places = [];
 
   map = new google.maps.Map(document.getElementById('map'),{
@@ -16,11 +16,11 @@ function initMap(){
   const markerTemplate = function(marker){
     return `
       <ul>
-      <li><b>Descripcion:</b>${marker.description}</li>
-      <li><b>Dirección:</b>${marker.address}</li>
-      <li><b>Numero Telefonico:</b>${marker.number}</li>
-      <li><b>Coordenadas:</b>${marker.coords}</li>
-      <li><b>Categoria:</b>${marker.category}</li>
+      <li><b>Descripcion: </b>${marker.description}</li>
+      <li><b>Dirección: </b>${marker.address}</li>
+      <li><b>Numero Telefonico: </b>${marker.number}</li>
+      <li><b>Coordenadas: </b>${marker.coords}</li>
+      <li><b>Categoria: </b>${marker.category}</li>
       </ul>
     `
   }

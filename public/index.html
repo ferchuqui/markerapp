@@ -26,11 +26,15 @@
       </label>
       <label class="label">
         Coordenadas
-        <input name="coords" class="input" type="text" value="-34.595986,-58.3724715">
+        <input name="coords" class="input" type="text">
       </label>
       <label class="label">
         Categoria
-        <input name="category" class="input" type="text">
+        <select class="select" name="category">
+          <option value="Comercial">Comercial</option>
+          <option value="Residencial">Residencial</option>
+          <option value="Mixta">Mixta</option>
+        </select>
       </label>
       <input type="submit" class="button" value="Agregar">
     </form>
