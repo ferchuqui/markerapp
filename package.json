@@ -1,0 +1,16 @@
+{
+  "name": "pinmapper",
+  "version": "1.0.0",
+  "description": "A Pin marker app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luis Fernando Farji <fernando.farji@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

@@ -9,7 +9,6 @@ function initMap(){
   const category = document.querySelector('input[name="category"]');
   const places = [];
 
-
   map = new google.maps.Map(document.getElementById('map'),{
     center: {lat: -34.397, lng: 150.644},
     zoom: 8
@@ -21,8 +20,6 @@ function initMap(){
       map: map
     });
     places.push(marker)
-
-    console.log(places)
   }
 
   form.addEventListener('submit', function (e){
@@ -40,6 +37,10 @@ function initMap(){
     }
     addMarker(marker);
   })
+
+  fetch('/markers')
+    .then(res => res.json())
+    .then(markers => markers.forEach(addMarker))
 }
 
 
