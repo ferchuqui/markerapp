@@ -17,6 +17,7 @@ function initMap(){
   const category = document.querySelector('[name="category"]');
   const success = document.querySelector('.msg-success')
   const autoComplete = new google.maps.places.Autocomplete(address);
+  let infowindow;
 
   map = new google.maps.Map(document.getElementById('map'),{
     center: {lat: -34.60368440000001, lng: -58.381559100000004},
@@ -28,6 +29,10 @@ function initMap(){
     rotateControl: false,
     fullscreenControl: false
   });
+
+  map.addListener('click', () => {
+    if(infowindow) infowindow.close()
+  })
 
   const validateDescription = () => {
     return description.value !== ""
@@ -74,10 +79,11 @@ function initMap(){
       position: marker.coords,
       map: map
     });
-    const infowindow = new google.maps.InfoWindow({
-      content: markerTemplate(marker)
-    });
     pin.addListener('click', function() {
+      if(infowindow) infowindow.close()
+      infowindow = new google.maps.InfoWindow({
+        content: markerTemplate(marker)
+      });
       infowindow.open(map, pin);
     });
     places.push({ info: marker, marker: pin })
