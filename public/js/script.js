@@ -19,7 +19,7 @@ function initMap(){
       <li><b>Descripcion: </b>${marker.description}</li>
       <li><b>Dirección: </b>${marker.address}</li>
       <li><b>Numero Telefonico: </b>${marker.number}</li>
-      <li><b>Coordenadas: </b>${marker.coords}</li>
+      <li><b>Coordenadas: </b>${marker.coords.lat},${marker.coords.lng}</li>
       <li><b>Categoria: </b>${marker.category}</li>
       </ul>
     `
