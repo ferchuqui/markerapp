@@ -21,7 +21,7 @@ function initMap(){
 
   map = new google.maps.Map(document.getElementById('map'),{
     center: {lat: -34.60368440000001, lng: -58.381559100000004},
-    zoom: 8,
+    zoom: 10,
     zoomControl: true,
     mapTypeControl: false,
     scaleControl: false,
@@ -60,6 +60,13 @@ function initMap(){
     coords.value = `${results.geometry.location.lat()} , ${results.geometry.location.lng()} `
   });
 
+  const reZoom = () => {
+    if(places.length === 0) return
+    const latLngBounds = new google.maps.LatLngBounds();
+    places.forEach((place) => latLngBounds.extend(place.info.coords))
+    map.setCenter(latLngBounds.getCenter())
+    map.fitBounds(latLngBounds)
+  }
 
   const markerTemplate = function(marker){
     return `
@@ -120,6 +127,7 @@ function initMap(){
     .then(res => res.json())
     .then((res) => {
       addMarker({ id: res.id, ...marker });
+      reZoom()
 
       description.value ="";
       address.value="";
@@ -134,7 +142,10 @@ function initMap(){
 
   fetch('/markers')
     .then(res => res.json())
-    .then(markers => markers.forEach(addMarker))
+    .then(markers => {
+      markers.forEach(addMarker)
+      reZoom()
+    })
 }
 
 
