@@ -30,22 +30,27 @@ function initMap(){
     fullscreenControl: false
   });
 
+
   map.addListener('click', () => {
     if(infowindow) infowindow.close()
   })
 
+  // Si no hay description devuelve false
   const validateDescription = () => {
     return description.value !== ""
   }
+  // Si no hay direccion devuelve false
   const validateAddress = () => {
     return address.value !== ""
   }
+  // Si las coordenadas estan fuera de rango devuelve false
   const validateCoords = () => {
     const [lat, lng] = coords.value.split(',');
     const parsedLat = parseFloat(lat);
     const parsedLng = parseFloat(lng);
     return !(isNaN(parsedLat) || isNaN(parsedLng) || parsedLat < -90 || parsedLat > 90 || parsedLng < -180 || parsedLng > 180)
   }
+  // Devuelve un objeto con cada validacion realizada siendo true los validos
   const valid = () => {
     return {
       description: validateDescription(),
@@ -60,6 +65,7 @@ function initMap(){
     coords.value = `${results.geometry.location.lat()} , ${results.geometry.location.lng()} `
   });
 
+  // Marca el zoom y posicion segun los marcadores
   const reZoom = () => {
     if(places.length === 0) return
     const latLngBounds = new google.maps.LatLngBounds();
@@ -129,6 +135,7 @@ function initMap(){
     .then(res => res.json())
     .then((res) => {
       addMarker({ id: res.id, ...marker });
+
       reZoom()
 
       description.value ="";
