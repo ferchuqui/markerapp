@@ -1,0 +1,21 @@
+body{
+  /* background-color: red; */
+  margin: 0;
+}
+#map{
+  height: 100%;
+
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.overlay{
+  background-color: white;
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}

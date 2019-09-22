@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/styles.css">
+  <title>Mapa Simple</title>
+</head>
+<body>
+  <div id="map"></div>
+  <div class="overlay">
+    <form action="getform.php" method="get">
+      <label>Descripcion: <input type="text"></label>
+      <label>Dirección: <input type="text"></label>
+      <label>Numero Telefonico<input type="email"></label>
+      <label>Coordenadas<input type="email"></label>
+      <label>Categoria<input type="email"></label>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+  <script>
+    var map;
+    function initMap(){
+      map = new google.maps.Map(document.getElementById('map'),{
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 8
+      });
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO4nmY_t6nh7Te0Z952z-hDapfB2zsGrI&callback=initMap"
+  async defer></script>
+ 
+</body>
+</html>
