@@ -13,11 +13,28 @@ function initMap(){
     center: {lat: -34.397, lng: 150.644},
     zoom: 8
   });
+  const markerTemplate = function(marker){
+    return `
+      <ul>
+      <li><b>Descripcion:</b>${marker.description}</li>
+      <li><b>Dirección:</b>${marker.address}</li>
+      <li><b>Numero Telefonico:</b>${marker.number}</li>
+      <li><b>Coordenadas:</b>${marker.coords}</li>
+      <li><b>Categoria:</b>${marker.category}</li>
+      </ul>
+    `
+  }
 
   const addMarker = function(marker){
     const pin = new google.maps.Marker({
       position: marker.coords,
       map: map
+    });
+    const infowindow = new google.maps.InfoWindow({
+      content: markerTemplate(marker)
+    });
+    pin.addListener('click', function() {
+      infowindow.open(map, pin);
     });
     places.push(marker)
   }
