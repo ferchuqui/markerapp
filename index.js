@@ -1,5 +1,6 @@
 const express = require('express')
 const low = require('lowdb')
+const shortid = require('shortid')
 const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
@@ -18,12 +19,20 @@ app.get('/markers', (req, res) => {
 })
 
 app.post('/markers', (req, res) => {
-  db.get('markers')
-    .push(req.body)
-    .write()
+  const id = shortid.generate()
+  db.get('markers').push({ id, ...req.body }).write()
   
+  res.send({
+    id
+  })
+})
+
+app.delete('/markers/:id', (req, res) => {
+  db.get('markers').remove({ id: req.params.id}).write()
   
-  res.send({"message": "ok"})
+  res.send({
+    id: req.params.id
+  })
 })
 
 app.listen(port, () => console.log(`Marker app listening on port ${port}!`))

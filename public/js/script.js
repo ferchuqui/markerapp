@@ -1,5 +1,13 @@
 
 var map;
+const places = [];
+function removeElement(id) {
+  places.find(place => place.info.id === id).marker.setMap(null)
+  fetch(`/markers/${id}`, {
+    method: 'delete'
+  })
+}
+
 function initMap(){
   const form = document.querySelector('.form');
   const description = document.querySelector('[name="description"]');
@@ -8,7 +16,6 @@ function initMap(){
   const coords = document.querySelector('[name="coords"]');
   const category = document.querySelector('[name="category"]');
   const success = document.querySelector('.msg-success')
-  const places = [];
   const autoComplete = new google.maps.places.Autocomplete(address);
 
   map = new google.maps.Map(document.getElementById('map'),{
@@ -57,6 +64,7 @@ function initMap(){
       <li><b>Numero Telefonico: </b>${marker.number}</li>
       <li><b>Coordenadas: </b>${marker.coords.lat},${marker.coords.lng}</li>
       <li><b>Categoria: </b>${marker.category}</li>
+      <a href="#" onclick="removeElement('${marker.id}')">Borrar</a>
       </ul>
     `
   }
@@ -72,7 +80,7 @@ function initMap(){
     pin.addListener('click', function() {
       infowindow.open(map, pin);
     });
-    places.push(marker)
+    places.push({ info: marker, marker: pin })
   }
 
   form.addEventListener('submit', function (e){
@@ -96,14 +104,17 @@ function initMap(){
       }
       document.querySelector(`[data-name=${key}]`).innerText = "Este campo no cumple las condiciones";
     })
-    addMarker(marker);
     fetch('/markers', {
       method: 'post',
       body: JSON.stringify(marker),
       headers:{
         'Content-Type': 'application/json'
       }
-    }).then(() => {
+    })
+    .then(res => res.json())
+    .then((res) => {
+      addMarker({ id: res.id, ...marker });
+
       description.value ="";
       address.value="";
       number.value="";
