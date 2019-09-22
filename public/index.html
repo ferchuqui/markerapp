@@ -14,22 +14,27 @@
     <form class="form">
       <label class="label">
         Descripcion: 
+        <strong class="error" data-name="description"></strong>
         <input name="description" class="input" type="text">
       </label>
       <label class="label">
         Dirección: 
+        <strong class="error" data-name="address"></strong>
         <input name="address" class="input" type="text">
       </label>
       <label class="label">
-        Numero Telefonico
+        Numero Telefonico: 
+        <strong class="error" data-name="number"></strong>
         <input name="number" class="input" type="text">
       </label>
       <label class="label">
         Coordenadas
+        <strong class="error" data-name="coords"></strong>
         <input name="coords" class="input" type="text">
       </label>
       <label class="label">
         Categoria
+        <strong class="error" data-name="category"></strong>
         <select class="select" name="category">
           <option value="Comercial">Comercial</option>
           <option value="Residencial">Residencial</option>

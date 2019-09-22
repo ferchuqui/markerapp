@@ -12,7 +12,7 @@ function initMap(){
   const autoComplete = new google.maps.places.Autocomplete(address);
 
   map = new google.maps.Map(document.getElementById('map'),{
-    center: {lat: -34.397, lng: 150.644},
+    center: {lat: -34.60368440000001, lng: -58.381559100000004},
     zoom: 8,
     zoomControl: true,
     mapTypeControl: false,
@@ -21,6 +21,26 @@ function initMap(){
     rotateControl: false,
     fullscreenControl: false
   });
+
+  const validateDescription = () => {
+    return description.value !== ""
+  }
+  const validateAddress = () => {
+    return address.value !== ""
+  }
+  const validateCoords = () => {
+    const [lat, lng] = coords.value.split(',');
+    const parsedLat = parseFloat(lat);
+    const parsedLng = parseFloat(lng);
+    return !(isNaN(parsedLat) || isNaN(parsedLng) || parsedLat < -90 || parsedLat > 90 || parsedLng < -180 || parsedLng > 180)
+  }
+  const valid = () => {
+    return {
+      description: validateDescription(),
+      address: validateAddress(),
+      coords: validateCoords()
+    }
+  }
 
   autoComplete.setFields(['geometry'])
   autoComplete.addListener('place_changed', function(){
@@ -68,6 +88,14 @@ function initMap(){
       },
       category: category.value
     }
+    const validations = valid()
+    Object.keys(validations).forEach((key) => {
+      if(validations[key]) {
+        document.querySelector(`[data-name=${key}]`).innerText = "";
+        return 
+      }
+      document.querySelector(`[data-name=${key}]`).innerText = "Este campo no cumple las condiciones";
+    })
     addMarker(marker);
     fetch('/markers', {
       method: 'post',

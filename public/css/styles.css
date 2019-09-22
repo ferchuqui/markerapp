@@ -87,6 +87,11 @@ html, body {
   color: green;
 }
 
+
+.error {
+  color: lightcoral;
+}
+
 .hidden {
   display: none;
 }
